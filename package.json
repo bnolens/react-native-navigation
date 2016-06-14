@@ -22,7 +22,7 @@
     "react": ">=0.14.5"
   },
   "dependencies": {
-    "react-native-controllers": "^2.0.0"
+    "react-native-controllers": "git://github.com/bnolens/react-native-controllers.git"
   },
   "optionalDependencies": {
     "react-redux": "*"
