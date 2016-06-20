@@ -15,6 +15,7 @@ class Navigator {
     this.navigatorEventID = navigatorEventID;
     this.navigatorEventHandler = null;
     this.navigatorEventSubscription = null;
+    this.tabbarControllerEventID = 'tabbarControllerEventID';
   }
 
   push(params = {}) {
@@ -91,8 +92,11 @@ class Navigator {
       let Emitter = Platform.OS === 'android' ? DeviceEventEmitter : NativeAppEventEmitter;
       this.navigatorEventSubscription = Emitter.addListener(this.navigatorEventID, (event) => this.onNavigatorEvent(event));
       _allNavigatorEventHandlers[this.navigatorEventID] = (event) => this.onNavigatorEvent(event);
+      this.navigatorEventSubscription = Emitter.addListener(this.tabbarControllerEventID, (event) => this.onNavigatorEvent(event));
+      _allNavigatorEventHandlers[this.navigatorEventID] = (event) => this.onNavigatorEvent(event);
     }
   }
+
   handleDeepLink(params = {}) {
     if (!params.link) return;
     const event = {
@@ -121,7 +125,7 @@ class Navigator {
 export default class Screen extends Component {
   static navigatorStyle = {};
   static navigatorButtons = {};
-  
+
   constructor(props) {
     super(props);
     if (props.navigatorID) {
