@@ -93,7 +93,9 @@ class Navigator {
       this.navigatorEventSubscription = Emitter.addListener(this.navigatorEventID, (event) => this.onNavigatorEvent(event));
       _allNavigatorEventHandlers[this.navigatorEventID] = (event) => this.onNavigatorEvent(event);
       this.navigatorEventSubscription = Emitter.addListener(this.tabbarControllerEventID, (event) => this.onNavigatorEvent(event));
-      _allNavigatorEventHandlers[this.navigatorEventID] = (event) => this.onNavigatorEvent(event);
+      _allNavigatorEventHandlers[this.tabbarControllerEventID] = (event) => this.onNavigatorEvent(event);
+      this.viewControllerEventSubscription = Emitter.addListener("viewControllerEvents", (event) => this.onNavigatorEvent(event));
+      _allNavigatorEventHandlers["viewControllerEvents"] = (event) => this.onNavigatorEvent(event);
     }
   }
 
